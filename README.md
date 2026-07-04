@@ -1,30 +1,25 @@
-# ♾️ InfinityBoard AI
+# InfinityBoard
 
-A high-performance, infinite-canvas whiteboard built entirely from scratch using pure JavaScript, HTML5 Canvas, and complex vector math. InfinityBoard features AI-assisted tools, a cinematic presentation engine, and mathematically precise vector object rendering.
+Built for the Hack Club YSWS Alchemize challenge.
 
-Built for the Hack Club YSWS Alchemize challenge! 🚀
+I wanted to see if I could build a Figma/Miro style infinite whiteboard completely from scratch without using any external libraries. No React, no canvas frameworks—just raw HTML5 Canvas, Vanilla JS, and a lot of math. 
 
-## ✨ Features
+### What I got working:
 
-* **The Infinite Camera:** Separated screen coordinates from world coordinates for perfectly crisp, boundless panning and zooming.
-* **Smart Pen (Shape AI):** Pure JavaScript geometry that calculates path distances, bounding boxes, and ratios to automatically snap messy ink into perfect vector shapes.
-* **Simulated Text AI:** A floating, world-to-screen mapped UI ready to connect to a real AI language model (features loading states and action menus).
-* **True Vector Engine:** A mathematically driven object system allowing you to select, drag, and modify shapes dynamically without pixel degradation.
-* **4K Export Engine:** A bounding-box algorithm that perfectly crops and renders high-resolution snapshots of your current board.
-* **Multi-Page Memory System:** A state manager capable of packing and unpacking complex arrays for a multi-page presentation experience.
-* **Custom Backgrounds:** Dynamic environments including dark modes, blueprints, grids, and custom image handling.
+* **Infinite panning and zooming:** This was honestly the hardest part. I had to build a custom camera system to separate screen coordinates from world coordinates so things scale properly when you zoom.
+* **Auto-Shape "Smart Pen":** I wrote a script that tracks your mouse path. If you draw a messy circle or box, it calculates the path length and bounding box ratio, deletes your ink, and replaces it with a perfect vector shape.
+* **AI Text UI:** I built a frosted-glass menu that physically tracks text boxes on the canvas. It has buttons for AI actions (Summarize, Make Pro, etc.). Right now it just runs a `setTimeout` to simulate an API delay, but the architecture is ready to plug into an LLM.
+* **Multi-page memory:** You can add new pages and flip through them. It saves the entire array of objects and the undo/redo stacks for every single page.
+* **Smart Exporting:** Wrote a function that loops through every object to find the absolute edges of your drawing, then crops and exports a clean PNG.
+* **Custom boards:** Dot grid, blueprint, dark mode, or you can upload your own image as the background.
 
-## 🛠️ Tech Stack
+### Tech Stack
+Just `index.html`, `style.css`, and `app.js`. Zero dependencies.
 
-* **HTML5 Canvas:** For high-DPI rendering and high-performance visual output.
-* **Vanilla JavaScript:** Zero external libraries. All state management, DOM manipulation, and vector math is written from scratch.
-* **CSS3:** Featuring frosted-glass (backdrop-filter) UI components and absolute positioning mapped to canvas world coordinates.
+### How to run it
+Just clone the repo and double-click `index.html` to open it in your browser. No build steps or `npm install` needed.
 
-## 🚀 How to Run Locally
+### What I learned
+Canvas performance is really annoying to manage. I originally had massive lag when drawing because the mouse was firing hundreds of events per second. I had to write a "point decimation" filter that only saves a coordinate if the mouse actually moves more than 2 pixels. Also, writing pure math for hit-detection (clicking on shapes to select them) is brutal but taught me a lot about how real design engines work.
 
-Because this project relies entirely on client-side technologies with zero build steps, running it is instantaneous.
-
-1. Clone this repository:
-   ```bash
-   git clone [https://github.com/zainabbasraza0-del/InfinityBoard.git](https://github.com/zainabbasraza0-del/InfinityBoard.git)
-   (Note: The AI Text features currently simulate an API delay to demonstrate the UI architecture.)
+Pretty proud of how this turned out!
