@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfinityBoard AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="canvas"></canvas>
+
+    <div id="aiToolbar" class="floating-ai-menu">
+        <span style="font-size:12px; font-weight:bold; color:#8b5cf6;">✨ AI Actions:</span>
+        <button class="ai-action-btn" data-action="summarize">Summarize</button>
+        <button class="ai-action-btn" data-action="professional">Make Pro</button>
+        <button class="ai-action-btn" data-action="idea">Ideate</button>
+    </div>
+
+    <div class="toolbar">
+        <button id="selectBtn" class="tool-btn action-btn">🖱️ Select</button>
+        <div class="divider"></div>
+        
+        <div class="dropdown">
+            <button class="tool-btn">🎨 Board ▾</button>
+            <div class="dropdown-content">
+                <button class="tool-btn bg-btn" data-bg="dots">⚪ Dots</button>
+                <button class="tool-btn bg-btn" data-bg="grid">⬜ Grid</button>
+                <button class="tool-btn bg-btn" data-bg="lined">📝 Lined</button>
+                <button class="tool-btn bg-btn" data-bg="blank">📄 Blank</button>
+                <button class="tool-btn bg-btn" data-bg="dark">🌙 Dark Mode</button>
+                <button class="tool-btn bg-btn" data-bg="blueprint">📐 Blueprint</button>
+                <div style="height:1px; background:#e2e8f0; margin:4px 0;"></div>
+                <label class="tool-btn" style="cursor:pointer; display:flex; justify-content:space-between;">
+                    🌈 Color <input type="color" id="bgColorPicker" style="opacity:0; width:0; height:0;">
+                </label>
+                <label class="tool-btn" style="cursor:pointer;">
+                    🖼️ Image <input type="file" id="bgImageInput" accept="image/*" style="display:none;">
+                </label>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="dropdown">
+            <button class="tool-btn">✏️ Draw ▾</button>
+            <div class="dropdown-content">
+                <button id="penBtn" class="tool-btn action-btn active">✏️ Pen</button>
+                <button id="smartpenBtn" class="tool-btn action-btn">🪄 Smart Pen</button>
+                <button id="highlighterBtn" class="tool-btn action-btn">🖍️ Highlight</button>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="tool-btn">⬛ Shapes ▾</button>
+            <div class="dropdown-content">
+                <button id="rectBtn" class="tool-btn action-btn">⬜ Rect</button>
+                <button id="circleBtn" class="tool-btn action-btn">⭕ Circle</button>
+                <button id="lineBtn" class="tool-btn action-btn">➖ Line</button>
+            </div>
+        </div>
+
+        <button id="textBtn" class="tool-btn action-btn">🔤 Text</button>
+        <button id="eraserBtn" class="tool-btn action-btn">🧽 Eraser</button>
+        <div class="divider"></div>
+        <button id="undoBtn" class="tool-btn">↩️</button>
+        <button id="redoBtn" class="tool-btn">↪️</button>
+        <div class="divider"></div>
+        <input type="color" id="colorPicker" value="#0f172a" title="Ink Color">
+        <input type="range" id="sizeSlider" min="2" max="20" value="4" title="Brush Size">
+        <div class="divider"></div>
+        <button id="exportBtn" class="tool-btn">📸 Export</button>
+        <button id="clearBtn" class="tool-btn danger-btn">🗑️ Clear</button>
+        <div class="divider"></div>
+        <button id="prevPageBtn" class="tool-btn">◀</button>
+        <span id="pageIndicator" style="font-size:13px; font-weight:600; color:#475569; padding: 0 8px;">1 / 1</span>
+        <button id="nextPageBtn" class="tool-btn">▶</button>
+        <button id="addPageBtn" class="tool-btn">➕ New</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
